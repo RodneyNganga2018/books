@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <title>Books</title>
+</head>
+<body>
+    <div class="container d-flex mt-5">
+        <div class="container">
+            <h1 class="mb-5">New Book</h1>
+            <form action="/books/new" method="POST">
+                <table>
+                    <tr>
+                        <td><label for="title" class="form-label mb-3">Title:</label></td>
+                        <td><input type="text" name="title" id="title" class="form-control mb-3 ms-3"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="pages" class="col-form-label mb-3">Number of Pages:</label></td>
+                        <td><input type="text" name="pages" id="pages" class="form-control mb-3 ms-3"></td>
+                    </tr>
+                </table>
+                <input type="submit" role="button" class="btn btn-primary">
+            </form>
+        </div>
+        <div class="container">
+            <h1 class="mb-5">All Books</h1>
+            <div class="container border border-3 rounded p-3 mb-3 overflow-auto" style="height:500px;">
+                <div class="mb-3">
+                    {% for book in books_tp %}
+                    <div class="mb-3">
+                        <a href="http://127.0.0.1:5000/books/{{book['id']}}">{{book['title']}}</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <a href="http://127.0.0.1:5000/authors" role="button" class="btn btn-outline-primary">Home</a>
+    </div>
+</body>
+</html>

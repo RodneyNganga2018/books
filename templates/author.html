@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <title>Author Show</title>
+</head>
+<body>
+    <div class="container d-flex mt-5">
+        <div class="container pe-5 border-end border-5">
+            <h1 class="mb-5">{{favorite_book_tp[0]['name']}}'s Favorites</h1>
+            <table class="table table-striped">
+                <tr>
+                    <th>Title</th>
+                    <th># of Pages</th>
+                </tr>
+                {% for book in favorite_book_tp %}
+                <tr>
+                    <td>{{book['title']}}</td>
+                    <td>{{book['pages']}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="container ps-5">
+            <h1 class="mb-5">Add Author's Favorites</h1>
+            <form action="/authors/{{favorite_book_tp[0]['id']}}/new_fav" method="POST" class="align-items-center mb-5">
+                <div class="row g-3 mb-3">
+                    <div class="col-auto me-3">
+                        <label for="book" class="col-form-label">Book:</label>
+                    </div>
+                    <div class="col-auto mb-3">
+                        <select name="book" class="form-select">
+                            <option selected>Select a book...</option>
+                            {% for book in books_tp %}
+                            {% if book['title'] not in fav_book_tp %}
+                            <option value="{{book['id']}}">{{book['title']}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <input type="submit" role="button" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <a href="http://127.0.0.1:5000/authors" role="button" class="btn btn-outline-primary">Home</a>
+    </div>
+</body>
+</html>

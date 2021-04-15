@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <title>Authors</title>
+</head>
+<body>
+    <div class="container d-flex mt-5">
+        <div class="container">
+            <h1 class="mb-5">New Author</h1>
+            <form action="/authors/new" method="POST">
+                <table>
+                    <tr>
+                        <td><label for="author_name" class="form-label mb-3">Name:</label></td>
+                        <td><input type="text" name="author_name" id="author_name" class="form-control mb-3 ms-3"></td>
+                    </tr>
+                </table>
+                <input type="submit" role="button" class="btn btn-primary">
+            </form>
+        </div>
+        <div class="container">
+            <h1 class="mb-5">All Authors</h1>
+            <div class="container border border-3 rounded p-3 mb-3 overflow-auto" style="height:500px;">
+                <div class="mb-3">
+                    {% for author in authors_tp %}
+                    <div class="mb-3">
+                        <a href="http://127.0.0.1:5000/authors/{{author['id']}}">{{author['name']}}</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5 d-flex justify-content-end"> 
+        <a href="http://127.0.0.1:5000/books" role="button" class="btn btn-outline-success">Add Book</a>
+    </div>
+</body>
+</html>
